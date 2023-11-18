@@ -11,15 +11,17 @@ namespace Business.Concretes
 {
     public class SalesManager : ISalesService
     {
-        public void SellGame(Gamer gamer, Product product)
+        public void SellGame(User user, Product product)
         {
             if (product.Offer != null)
             {
                 product.Price = product.Price * (100- product.Offer.Discount);
-            }
-            gamer.OwnedProducts.Add(product);
-            
-            Console.WriteLine($"{product.ProductName} is purchased by {gamer.FirstName} {gamer.LastName} for {product.Price}");
+            }            
+            Console.WriteLine($"{product.ProductName} is purchased by {user.FirstName} {user.LastName} for {product.Price}");
+
+            user.OwnedProducts=new List<Product>();
+
+            user.OwnedProducts.Add(product);
         }
     }
 }

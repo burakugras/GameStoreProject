@@ -21,11 +21,9 @@ internal class Program
         IGameDal gameDal = new GameDal();
         IGameService gameService = new GameManager(gameDal);
         gameService.Add(game1);
-        gameService.Update(game1);
-        gameService.Delete(game1);
 
-        //SalesManager salesManager = new SalesManager();
-        //salesManager.SellGame(user1, game1);
+        ISalesService salesManager = new SalesManager();
+        salesManager.SellGame(user1, game1);
 
 
 

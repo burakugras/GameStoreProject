@@ -10,6 +10,6 @@ namespace Business.Abstracts
 {
     public interface ISalesService
     {
-        void SellGame(Gamer gamer, Product product);
+        void SellGame(User user, Product product);
     }
 }
