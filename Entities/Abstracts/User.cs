@@ -12,6 +12,6 @@ namespace Entities.Abstracts
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public abstract double Balance { get; }
-        public List<Product>? OwnedProducts { get; set; }
+        public List<Product> OwnedProducts { get; set; }=new List<Product>();
     }
 }

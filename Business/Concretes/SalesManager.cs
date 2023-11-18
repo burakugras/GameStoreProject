@@ -19,9 +19,9 @@ namespace Business.Concretes
             }            
             Console.WriteLine($"{product.ProductName} is purchased by {user.FirstName} {user.LastName} for {product.Price}");
 
-            user.OwnedProducts=new List<Product>();
 
             user.OwnedProducts.Add(product);
+            
         }
     }
 }
