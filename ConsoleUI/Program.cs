@@ -18,12 +18,16 @@ internal class Program
 
 
         Product game1 = new Game() { Id = 1, ProductName = "Ori and Blind Forest", Price = 50, UnitInStock = 100 };
+
+        Product game2 = new Game() { Id = 2, ProductName = "Super Mario", Price = 40, UnitInStock = 125, Offer = new Campaign { Discount = 10 } };
+
         IGameDal gameDal = new GameDal();
         IGameService gameService = new GameManager(gameDal);
         gameService.Add(game1);
 
         ISalesService salesManager = new SalesManager();
         salesManager.SellGame(user1, game1);
+        salesManager.SellGame(user1, game2);
 
 
 

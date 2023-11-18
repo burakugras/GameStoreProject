@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DataAccess.Concretes
 {
     public class GameDal : IGameDal
-    {        
+    {      
         
         public void Add(Product product)
         {
