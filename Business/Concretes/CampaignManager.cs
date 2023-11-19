@@ -1,4 +1,5 @@
 ﻿using Business.Abstracts;
+using Entities.Abstracts;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -8,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
-    internal class CampaignManager : ICampaignService
+    public class CampaignManager : ICampaignService
     {
-        public void AddCampaign(Game game, Campaign campaign)
+        public void AddCampaign(Product product, Offer offer)
         {
-            game.Offer = campaign;
-            Console.WriteLine($"Campaign {campaign.Name} added for {game.ProductName}");
+            product.Offer = offer;
+            Console.WriteLine($"Campaign {offer.Name} added for {product.ProductName}");
         }
-        public void UpdateCampaign(Game game, Campaign campaign)
+        public void UpdateCampaign(Product product, Offer offer)
         {
-            Console.WriteLine($"Campaign {campaign.Name} updated for {game.ProductName}");
+            Console.WriteLine($"Campaign {offer.Name} updated for {product.ProductName}");
         }
 
-        public void DeleteCampaign(Game game, Campaign campaign)
+        public void DeleteCampaign(Product product, Offer offer)
         {
-            game.Offer = null;
+            product.Offer = null;
         }
 
     }

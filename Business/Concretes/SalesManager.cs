@@ -17,7 +17,7 @@ namespace Business.Concretes
             {
                 product.Price = product.Price * ((100- product.Offer.Discount)/100);
             }            
-            Console.WriteLine($"{product.ProductName} is purchased by {user.FirstName} {user.LastName} for {product.Price}");
+            Console.WriteLine($"{product.ProductName} is purchased by {user.FirstName} {user.LastName} for {product.Price} dollars");
 
             //user.OwnedProducts=new List<Product>();
             user.OwnedProducts.Add(product);

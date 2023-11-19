@@ -1,4 +1,5 @@
-﻿using Entities.Concretes;
+﻿using Entities.Abstracts;
+using Entities.Concretes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Business.Abstracts
 {
     public interface ICampaignService
     {
-        void AddCampaign(Game game, Campaign campaign);
-        void UpdateCampaign(Game game, Campaign campaign);
-        void DeleteCampaign(Game game, Campaign campaign);
+        void AddCampaign(Product product, Offer offer);
+        void UpdateCampaign(Product product, Offer offer);
+        void DeleteCampaign(Product product, Offer offer);
 
     }
 }

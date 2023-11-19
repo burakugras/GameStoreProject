@@ -19,11 +19,19 @@ internal class Program
 
         Product game1 = new Game() { Id = 1, ProductName = "Ori and Blind Forest", Price = 50, UnitInStock = 100 };
 
-        Product game2 = new Game() { Id = 2, ProductName = "Super Mario", Price = 40, UnitInStock = 125, Offer = new Campaign { Discount = 10 } };
+        Product game2 = new Game() { Id = 2, ProductName = "Super Mario", Price = 40, UnitInStock = 125/*, Offer = new Campaign { Discount = 10 }*/ };
+
+        Offer campaign1 = new Campaign() { Id = 1, Name = "Winter Sale", Discount = 10 };
+
+        ICampaignService campaignService = new CampaignManager();
+        campaignService.AddCampaign(game2, campaign1);
+        //campaignService.DeleteCampaign(game2,campaign1); CAMPAIGN HAS BEEN DELETED FOR HERE
+
 
         IGameDal gameDal = new GameDal();
         IGameService gameService = new GameManager(gameDal);
         gameService.Add(game1);
+        gameService.Add(game2);
 
         ISalesService salesManager = new SalesManager();
         salesManager.SellGame(user1, game1);
