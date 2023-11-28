@@ -2,7 +2,7 @@
 using Business.Concretes;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
-using Entities.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 internal class Program
@@ -12,23 +12,24 @@ internal class Program
         Gamer user1 = new Gamer() { Id = 1, FirstName = "Burak", LastName = "Uğraş", BirthYear = 1990, TcNo = "12345678901" };
 
         IVerificationService verificationService = new EGovernmentVerificationService();
-        IGamerDal gamerDal = new GamerDal();
+        IGamerDal gamerDal = new EfGamerDal();
         IGamerService gamerService = new GamerManager(verificationService, gamerDal);
         gamerService.Add(user1);
 
 
-        Product game1 = new Game() { Id = 1, ProductName = "Ori and Blind Forest", Price = 50, UnitInStock = 100 };
+        Game game1 = new Game() { Id = 1, Name = "Ori and Blind Forest", Price = 50, UnitsInStock = 100 };
 
-        Product game2 = new Game() { Id = 2, ProductName = "Super Mario", Price = 40, UnitInStock = 125/*, Offer = new Campaign { Discount = 10 }*/ };
+        Game game2 = new Game() { Id = 2, Name = "Super Mario", Price = 40, UnitsInStock = 125/*, Offer = new Campaign { Discount = 10 }*/ };
 
-        Offer campaign1 = new Campaign() { Id = 1, Name = "Winter Sale", Discount = 10 };
+        Campaign campaign1 = new Campaign() { Id = 1, Name = "Winter Sale", Discount = 20 };
 
-        ICampaignService campaignService = new CampaignManager();
-        campaignService.AddCampaign(game2, campaign1);
+        ICampaignService campaignService = new CampaignManager(new EfCampaignDal());
+        campaignService.Add( campaign1);
+        campaignService.Add(campaign1);
         //campaignService.DeleteCampaign(game2,campaign1); CAMPAIGN HAS BEEN DELETED FOR HERE
 
 
-        IGameDal gameDal = new GameDal();
+        IGameDal gameDal = new EfGameDal();
         IGameService gameService = new GameManager(gameDal);
         gameService.Add(game1);
         gameService.Add(game2);
@@ -36,7 +37,6 @@ internal class Program
         ISalesService salesManager = new SalesManager();
         salesManager.SellGame(user1, game1);
         salesManager.SellGame(user1, game2);
-
 
 
     }

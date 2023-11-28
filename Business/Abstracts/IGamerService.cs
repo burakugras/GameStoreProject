@@ -10,7 +10,9 @@ namespace Business.Abstracts
     public interface IGamerService
     {
         void Add(Gamer gamer);
-        void Delete(Gamer gamer);
         void Update(Gamer gamer);
+        void Delete(Gamer gamer);
+        List<Gamer> GetAll();
+        Gamer Get(int id);
     }
 }

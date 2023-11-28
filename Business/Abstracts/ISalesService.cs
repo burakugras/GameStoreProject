@@ -1,5 +1,4 @@
-﻿using Entities.Abstracts;
-using Entities.Concretes;
+﻿using Entities.Concretes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,6 @@ namespace Business.Abstracts
 {
     public interface ISalesService
     {
-        void SellGame(User user, Product product);
+        void SellGame(Gamer gamer, Game game);
     }
 }

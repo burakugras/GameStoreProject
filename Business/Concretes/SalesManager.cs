@@ -1,5 +1,4 @@
 ﻿using Business.Abstracts;
-using Entities.Abstracts;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -11,16 +10,16 @@ namespace Business.Concretes
 {
     public class SalesManager : ISalesService
     {
-        public void SellGame(User user, Product product)
+        public void SellGame(Gamer gamer, Game game)
         {
-            if (product.Offer != null)
+            if (game.Offer != null)
             {
-                product.Price = product.Price * ((100- product.Offer.Discount)/100);
+                game.Price = game.Price * ((100- game.Offer.Discount)/100);
             }            
-            Console.WriteLine($"{product.ProductName} is purchased by {user.FirstName} {user.LastName} for {product.Price} dollars");
+            Console.WriteLine($"{game.Name} is purchased by {gamer.FirstName} {gamer.LastName} for {game.Price} dollars");
 
             //user.OwnedProducts=new List<Product>();
-            user.OwnedProducts.Add(product);
+            gamer.OwnedProducts.Add(game);
         }
     }
 }

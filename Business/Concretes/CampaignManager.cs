@@ -1,5 +1,5 @@
 ﻿using Business.Abstracts;
-using Entities.Abstracts;
+using DataAccess.Abstracts;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -11,20 +11,33 @@ namespace Business.Concretes
 {
     public class CampaignManager : ICampaignService
     {
-        public void AddCampaign(Product product, Offer offer)
+        ICampaignDal _campaignDal;
+        public CampaignManager(ICampaignDal campaignDal) 
         {
-            product.Offer = offer;
-            Console.WriteLine($"Campaign {offer.Name} added for {product.ProductName}");
+            _campaignDal = campaignDal;
         }
-        public void UpdateCampaign(Product product, Offer offer)
+        public void Add(Campaign campaign)
         {
-            Console.WriteLine($"Campaign {offer.Name} updated for {product.ProductName}");
+            _campaignDal.Add(campaign);
+        }
+        public void Update(Campaign campaign)
+        {
+            _campaignDal.Update(campaign);
         }
 
-        public void DeleteCampaign(Product product, Offer offer)
+        public void Delete(Campaign campaign)
         {
-            product.Offer = null;
+            _campaignDal.Delete(campaign);
         }
 
+        public List<Campaign> GetAll()
+        {
+            return _campaignDal.GetAll();
+        }
+
+        public Campaign Get(int id)
+        {
+            return _campaignDal.Get(c=>c.Id == id);
+        }
     }
 }

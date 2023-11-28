@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IGameDal:IEntityRepository<Game>
+    public interface ICampaignDal : IEntityRepository<Campaign>
     {
-        
 
     }
 }

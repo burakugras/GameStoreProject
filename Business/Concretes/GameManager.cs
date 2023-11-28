@@ -1,6 +1,5 @@
 ﻿using Business.Abstracts;
 using DataAccess.Abstracts;
-using Entities.Abstracts;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -17,19 +16,30 @@ namespace Business.Concretes
         {
             _gameDal = gameDal;
         }
-        public void Add(Product product)
+        public void Add(Game game)
         {
-            _gameDal.Add(product);
+            _gameDal.Add(game);
+        }                
+
+        public void Delete(Game game)
+        {
+            _gameDal.Delete(game);
+        }                
+
+        public Game Get(int id)
+        {
+            return _gameDal.Get(g=>g.Id == id);
         }
 
-        public void Delete(Product product)
+        public List<Game> GetAll()
         {
-            _gameDal.Delete(product);
+            return _gameDal.GetAll();
         }
 
-        public void Update(Product product)
+        public void Update(Game game)
         {
-            _gameDal.Update(product);
+            _gameDal.Update(game);
         }
+
     }
 }

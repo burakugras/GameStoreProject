@@ -36,6 +36,16 @@ namespace Business.Concretes
             _gamerDal.Delete(gamer);
         }
 
+        public Gamer Get(int id)
+        {
+            return _gamerDal.Get(g=>g.Id == id);
+        }
+
+        public List<Gamer> GetAll()
+        {
+            return _gamerDal.GetAll();
+        }
+
         public void Update(Gamer gamer)
         {
             _gamerDal.Update(gamer);
