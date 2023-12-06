@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
-     public class EGovernmentVerificationService : IVerificationService
+    public class EGovernmentVerificationService : IVerificationService
     {
         public bool Verify(Gamer gamer)
         {

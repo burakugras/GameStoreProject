@@ -14,9 +14,9 @@ namespace Business.Concretes
         {
             if (game.Offer != null)
             {
-                game.Price = game.Price * ((100- game.Offer.Discount)/100);
-            }            
-            Console.WriteLine($"{game.Name} is purchased by {gamer.FirstName} {gamer.LastName} for {game.Price} dollars");
+                decimal discount = (decimal)game.Offer.Discount;
+                game.Price = game.Price * ((100 - discount ) / 100);
+            }
 
             //user.OwnedProducts=new List<Product>();
             gamer.OwnedProducts.Add(game);

@@ -10,8 +10,8 @@ namespace Entities.Concretes
     public class Game : IEntity
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public double Price { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
         public int UnitsInStock { get; set; }
         public Campaign? Offer { get; set; }
     }

@@ -11,24 +11,17 @@ namespace Business.Concretes
 {
     public class GamerManager : IGamerService
     {
-        private IVerificationService _verificationService;
+
         private IGamerDal _gamerDal;
-        public GamerManager(IVerificationService verificationService, IGamerDal gamerDal)
+        public GamerManager(IGamerDal gamerDal)
         {
-            _verificationService = verificationService;
             _gamerDal = gamerDal;
         }
 
         public void Add(Gamer gamer)
         {
-            if (_verificationService.Verify(gamer))
-            {
-                _gamerDal.Add(gamer);
-            }
-            else
-            {
-                Console.WriteLine("Registration failed");
-            }
+            _gamerDal.Add(gamer);
+
         }
 
         public void Delete(Gamer gamer)
@@ -38,7 +31,7 @@ namespace Business.Concretes
 
         public Gamer Get(int id)
         {
-            return _gamerDal.Get(g=>g.Id == id);
+            return _gamerDal.Get(g => g.Id == id);
         }
 
         public List<Gamer> GetAll()
