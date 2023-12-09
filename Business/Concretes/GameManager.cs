@@ -1,7 +1,12 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
 using Business.Constants;
+using Business.Dtos.Requests;
+using Business.Dtos.Responses;
+using Core.DataAccess.Paging;
 using Core.Utilities;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -13,39 +18,59 @@ namespace Business.Concretes
 {
     public class GameManager : IGameService
     {
-        private IGameDal _gameDal;
-        public GameManager(IGameDal gameDal)
+        IGameDal _gameDal;
+        IMapper _mapper;
+        public GameManager(IGameDal gameDal, IMapper mapper)
         {
             _gameDal = gameDal;
-        }
-        public IResult Add(Game game)
-        {
-            _gameDal.Add(game);
-            return new SuccessResult(Messages.ProductAdded);
-        }                
-
-        public IResult Delete(Game game)
-        {
-            _gameDal.Delete(game);
-            return new SuccessResult(Messages.ProductDeleted);
-
+            _mapper = mapper;
         }
 
-        public IDataResult<Game> Get(int id)
+        public async Task<CreatedGameResponse> Add(CreateGameRequest createGameRequest)
         {
-            return new SuccessDataResult<Game>(_gameDal.Get(g=>g.Id == id));
+            Game game = _mapper.Map<Game>(createGameRequest);
+            Game createdGame = await _gameDal.AddAsync(game);
+
+            CreatedGameResponse createdGameResponse = _mapper.Map<CreatedGameResponse>(createdGame);
+
+            return createdGameResponse;
         }
 
-        public IDataResult<List<Game>> GetAll()
+        public async Task<IResult> Delete(Game game)
         {
-            return new SuccessDataResult<List<Game>>(_gameDal.GetAll(),Messages.ProductsListed);
+            await _gameDal.DeleteAsync(game,true);
+            return new SuccessResult("Oyun silindi");//magic string!!!
         }
 
-        public IResult Update(Game game)
+        public async Task<CreatedGameResponse> Get(Guid id)
         {
-            _gameDal.Update(game);
-            return new SuccessResult();
+            var getGame = await _gameDal.GetAsync(g => g.Id == id);
+            var mappedGame = _mapper.Map<CreatedGameResponse>(getGame);
+            return mappedGame;
         }
 
+        /*
+        public async Task<Game> Get(Guid id)
+        {
+            var getGame = await _gameDal.GetAsync(g => g.Id == id);
+            //var mappedGame = _mapper.Map<CreatedGameResponse>(getGame);
+            return getGame;
+        }
+        */
+
+        public async Task<IPaginate<GetListGameResponse>> GetAll()
+        {
+            var gameList = await _gameDal.GetListAsync();
+            var responseList = _mapper.Map<Paginate<GetListGameResponse>>(gameList);
+
+            return responseList;
+        }
+
+        public async Task<CreatedGameResponse> Update(Game game)
+        {            
+            var updatedGame= await _gameDal.UpdateAsync(game);
+            var mappedGame=_mapper.Map<CreatedGameResponse>(updatedGame);
+            return mappedGame;
+        }
     }
 }

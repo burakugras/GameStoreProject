@@ -1,4 +1,7 @@
-﻿using Core.Utilities;
+﻿using Business.Dtos.Requests;
+using Business.Dtos.Responses;
+using Core.DataAccess.Paging;
+using Core.Utilities;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -10,11 +13,11 @@ namespace Business.Abstracts
 {
     public interface IGameService
     {
-        IResult Add(Game game);
-        IResult Delete(Game game);
-        IResult Update(Game game);
-        IDataResult<List<Game>> GetAll();
-        IDataResult<Game> Get(int id);
+        Task<CreatedGameResponse> Add(CreateGameRequest createGameRequest);
+        Task<CreatedGameResponse> Update(Game game);
+        Task<IResult> Delete(Game game);
+        Task<IPaginate<GetListGameResponse>> GetAll();
+        Task<CreatedGameResponse> Get(Guid id);
 
     }
 }

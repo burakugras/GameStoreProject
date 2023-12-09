@@ -1,5 +1,7 @@
 using Business.Abstracts;
 using Business.Concretes;
+using DataAccess;
+using Business;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework;
 
@@ -8,9 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddBusinessServices();
+builder.Services.AddDataAccessServices(builder.Configuration);
 
-builder.Services.AddSingleton<IGameService, GameManager>();
-builder.Services.AddSingleton<IGameDal, EfGameDal>();
 //builder.Services.AddSingleton<IProductDal,EfProductDal>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

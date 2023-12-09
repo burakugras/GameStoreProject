@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Gamer : IEntity
+    public class Gamer :Entity<Guid>
     {
-        
-        public string TcNo { get; set; }
-        public int BirthYear { get; set; }
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Balance { get; set; } = 0; 

@@ -1,15 +1,14 @@
-﻿using Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concretes
+namespace Business.Dtos.Responses
 {
-    public class Campaign:Entity<Guid>
+    public class GetListCampaignResponse
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        public float? Discount { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.DataAccess.Repositories;
 using DataAccess.Abstracts;
+using DataAccess.Contexts;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-    public class EfGameDal : EfEntityRepositoryBase<Game, GameStoreDBContext>, IGameDal
+    public class EfGameDal : EfRepositoryBase<Game, Guid, GameStoreDBContext>, IGameDal
     {
-
+        GameStoreDBContext _context;
+        public EfGameDal(GameStoreDBContext context) : base(context)
+        {
+            _context = context;
+        }
     }
 }

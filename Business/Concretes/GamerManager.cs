@@ -1,5 +1,10 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
+using Business.Dtos.Requests;
+using Business.Dtos.Responses;
+using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -12,36 +17,45 @@ namespace Business.Concretes
     public class GamerManager : IGamerService
     {
 
-        private IGamerDal _gamerDal;
-        public GamerManager(IGamerDal gamerDal)
+        IGamerDal _gamerDal;
+        IMapper _mapper;
+        public GamerManager(IGamerDal gamerDal, IMapper mapper)
         {
             _gamerDal = gamerDal;
+            _mapper = mapper;
         }
 
-        public void Add(Gamer gamer)
+        public async Task<CreatedGamerResponse> Add(CreateGamerRequest createGamerRequest)
         {
-            _gamerDal.Add(gamer);
+            Gamer gamer = _mapper.Map<Gamer>(createGamerRequest);
+            Gamer createdGamer = await _gamerDal.AddAsync(gamer);
 
+            CreatedGamerResponse createdGamerResponse = _mapper.Map<CreatedGamerResponse>(createdGamer);
+
+            return createdGamerResponse;
         }
 
-        public void Delete(Gamer gamer)
+        public Task<CreatedGamerResponse> Delete(CreateGamerRequest createGamerRequest)
         {
-            _gamerDal.Delete(gamer);
+            throw new NotImplementedException();
         }
 
-        public Gamer Get(int id)
+        public Task<CreatedGamerResponse> Get(Guid id)
         {
-            return _gamerDal.Get(g => g.Id == id);
+            throw new NotImplementedException();
         }
 
-        public List<Gamer> GetAll()
+        public async Task<IPaginate<GetListGamerResponse>> GetAll()
         {
-            return _gamerDal.GetAll();
+            var gamerList = await _gamerDal.GetListAsync();
+            var responseList = _mapper.Map<Paginate<GetListGamerResponse>>(gamerList);
+
+            return responseList;
         }
 
-        public void Update(Gamer gamer)
+        public Task<CreatedGamerResponse> Update(CreateGamerRequest createGamerRequest)
         {
-            _gamerDal.Update(gamer);
+            throw new NotImplementedException();
         }
     }
 }

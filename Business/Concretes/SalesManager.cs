@@ -12,14 +12,14 @@ namespace Business.Concretes
     {
         public void SellGame(Gamer gamer, Game game)
         {
-            if (game.Offer != null)
-            {
-                decimal discount = (decimal)game.Offer.Discount;
-                game.Price = game.Price * ((100 - discount ) / 100);
-            }
+            //if (game.Offer != null)
+            //{
+            //    decimal discount = (decimal)game.Offer.Discount;
+            //    game.Price = game.Price * ((100 - discount ) / 100);
+            //}
 
-            //user.OwnedProducts=new List<Product>();
-            gamer.OwnedProducts.Add(game);
+            ////user.OwnedProducts=new List<Product>();
+            //gamer.OwnedProducts.Add(game);
         }
     }
 }

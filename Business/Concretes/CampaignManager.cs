@@ -1,4 +1,9 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
+using Business.Dtos.Requests;
+using Business.Dtos.Responses;
+using Core.DataAccess.Paging;
+using Core.Utilities;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using System;
@@ -12,32 +17,44 @@ namespace Business.Concretes
     public class CampaignManager : ICampaignService
     {
         ICampaignDal _campaignDal;
-        public CampaignManager(ICampaignDal campaignDal) 
+        IMapper _mapper;
+        public CampaignManager(ICampaignDal campaignDal,IMapper mapper) 
         {
             _campaignDal = campaignDal;
-        }
-        public void Add(Campaign campaign)
-        {
-            _campaignDal.Add(campaign);
-        }
-        public void Update(Campaign campaign)
-        {
-            _campaignDal.Update(campaign);
+            _mapper = mapper;
         }
 
-        public void Delete(Campaign campaign)
+        public async Task<CreatedCampaignResponse> Add(CreateCampaignRequest createCampaignRequest)
         {
-            _campaignDal.Delete(campaign);
+            Campaign campaign = _mapper.Map<Campaign>(createCampaignRequest);
+            Campaign createdCampaign=await _campaignDal.AddAsync(campaign);
+
+            CreatedCampaignResponse createdCampaignResponse=_mapper.Map<CreatedCampaignResponse>(createdCampaign);
+
+            return createdCampaignResponse;
         }
 
-        public List<Campaign> GetAll()
+        public Task<CreatedCampaignResponse> Delete(CreateCampaignRequest createCampaignRequest)
         {
-            return _campaignDal.GetAll();
+            throw new NotImplementedException();
         }
 
-        public Campaign Get(int id)
+        public async Task<CreatedCampaignResponse> Get(Guid id)
         {
-            return _campaignDal.Get(c=>c.Id == id);
+            throw new NotImplementedException();
+        }
+
+        public async Task<IPaginate<GetListCampaignResponse>> GetAll()
+        {
+            var campaignList = await _campaignDal.GetListAsync();
+            var responseList=_mapper.Map<Paginate<GetListCampaignResponse>>(campaignList);
+
+            return responseList;
+        }
+
+        public Task<CreatedCampaignResponse> Update(CreateCampaignRequest createCampaignRequest)
+        {
+            throw new NotImplementedException();
         }
     }
 }

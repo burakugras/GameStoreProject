@@ -1,4 +1,6 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Requests;
+using Core.DataAccess.Paging;
 using Entities.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,49 +17,39 @@ namespace WebAPI.Controllers
             _gameService = gameService;
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
+        [HttpPost("add")]
+        public async Task<IActionResult> Add([FromBody] CreateGameRequest createGameRequest)
         {
-            var result = _gameService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-
-            }
-            return BadRequest(result);
+            var result = await _gameService.Add(createGameRequest);
+            return Ok(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Game game)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var result = _gameService.Add(game);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            var result=await _gameService.GetAll();
+            return Ok(result);
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Game game)
+        public async Task<IActionResult> Update([FromBody] Game game)
         {
-            var result = _gameService.Update(game);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            var result= await _gameService.Update(game);
+            return Ok(result);
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(Game game)
+        public async Task<IActionResult> Delete([FromBody] Game game)
         {
-            var result = _gameService.Delete(game);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            var result = await _gameService.Delete(game);
+            return Ok(result);
+        }
+
+        [HttpGet("getbyid")]
+        public async Task<IActionResult> GetGame(Guid id)
+        {
+            var result = await _gameService.Get(id);
+            return Ok(result);
         }
     }
 }

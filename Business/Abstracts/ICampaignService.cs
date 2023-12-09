@@ -1,4 +1,7 @@
-﻿using Entities.Concretes;
+﻿using Business.Dtos.Requests;
+using Business.Dtos.Responses;
+using Core.DataAccess.Paging;
+using Entities.Concretes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +12,11 @@ namespace Business.Abstracts
 {
     public interface ICampaignService
     {
-        void Add(Campaign campaign);
-        void Update(Campaign campaign);
-        void Delete(Campaign campaign);
-        List<Campaign> GetAll();
-        Campaign Get(int id);
+        Task<CreatedCampaignResponse> Add(CreateCampaignRequest createCampaignRequest);
+        Task<CreatedCampaignResponse> Update(CreateCampaignRequest createCampaignRequest);
+        Task<CreatedCampaignResponse> Delete(CreateCampaignRequest createCampaignRequest);
+        Task<IPaginate<GetListCampaignResponse>> GetAll();
+        Task<CreatedCampaignResponse> Get(Guid id);
 
     }
 }

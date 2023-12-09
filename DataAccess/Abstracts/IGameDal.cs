@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess;
+using Core.DataAccess.Repositories;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IGameDal:IEntityRepository<Game>
+    public interface IGameDal : IRepository<Game, Guid>, IAsyncRepository<Game, Guid>
     {
-        
+
 
     }
 }
