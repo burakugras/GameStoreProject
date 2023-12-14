@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Responses
 {
-    public class GetListCampaignResponse
+    public class UpdatedCampaignResponse
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public float? Discount { get; set; }
     }

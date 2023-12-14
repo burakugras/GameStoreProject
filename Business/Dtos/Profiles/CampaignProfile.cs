@@ -20,6 +20,9 @@ namespace Business.Dtos.Profiles
 
             CreateMap<Campaign, GetListCampaignResponse>().ReverseMap();
             CreateMap<Paginate<Campaign>, Paginate<GetListCampaignResponse>>().ReverseMap();
+
+            CreateMap<UpdateCampaignRequest,Campaign>();
+            CreateMap<Campaign, UpdatedCampaignResponse>();
         }
     }
 }

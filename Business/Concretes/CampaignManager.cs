@@ -5,6 +5,7 @@ using Business.Dtos.Responses;
 using Core.DataAccess.Paging;
 using Core.Utilities;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,18 @@ namespace Business.Concretes
             return createdCampaignResponse;
         }
 
-        public Task<CreatedCampaignResponse> Delete(CreateCampaignRequest createCampaignRequest)
+        public async Task<Campaign> Delete(Campaign campaign)
         {
-            throw new NotImplementedException();
+            var data = await _campaignDal.GetAsync(c => c.Id == campaign.Id);
+            var result = await _campaignDal.DeleteAsync(data, true);
+            return result;
         }
 
         public async Task<CreatedCampaignResponse> Get(Guid id)
         {
-            throw new NotImplementedException();
+            var data= await _campaignDal.GetAsync(c=>c.Id == id);
+            var mappedCampaign=_mapper.Map<CreatedCampaignResponse>(data);
+            return mappedCampaign;
         }
 
         public async Task<IPaginate<GetListCampaignResponse>> GetAll()
@@ -52,9 +57,16 @@ namespace Business.Concretes
             return responseList;
         }
 
-        public Task<CreatedCampaignResponse> Update(CreateCampaignRequest createCampaignRequest)
+        public async Task<UpdatedCampaignResponse> Update(UpdateCampaignRequest updateCampaignRequest)
         {
-            throw new NotImplementedException();
+            var data = await _campaignDal.GetAsync(c => c.Id == updateCampaignRequest.Id);
+            _mapper.Map(updateCampaignRequest, data);
+
+            data.UpdatedDate = DateTime.Now;
+            var updatedCampaign = await _campaignDal.UpdateAsync(data);
+
+            var mappedCampaign = _mapper.Map<UpdatedCampaignResponse>(updatedCampaign);
+            return mappedCampaign;
         }
     }
 }

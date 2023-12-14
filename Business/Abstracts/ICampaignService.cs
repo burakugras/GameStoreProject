@@ -13,8 +13,8 @@ namespace Business.Abstracts
     public interface ICampaignService
     {
         Task<CreatedCampaignResponse> Add(CreateCampaignRequest createCampaignRequest);
-        Task<CreatedCampaignResponse> Update(CreateCampaignRequest createCampaignRequest);
-        Task<CreatedCampaignResponse> Delete(CreateCampaignRequest createCampaignRequest);
+        Task<UpdatedCampaignResponse> Update(UpdateCampaignRequest updateCampaignRequest);
+        Task<Campaign> Delete(Campaign campaign);
         Task<IPaginate<GetListCampaignResponse>> GetAll();
         Task<CreatedCampaignResponse> Get(Guid id);
 

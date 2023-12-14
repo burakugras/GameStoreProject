@@ -24,7 +24,7 @@ public class GamesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll()
     {
         var result=await _gameService.GetAll();
