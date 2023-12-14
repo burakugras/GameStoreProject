@@ -20,6 +20,9 @@ namespace Business.Dtos.Profiles
 
             CreateMap<Game, GetListGameResponse>().ReverseMap();
             CreateMap<Paginate<Game>, Paginate<GetListGameResponse>>().ReverseMap();
+
+            CreateMap<UpdateGameRequest, Game>();
+            CreateMap<Game, UpdatedGameResponse>();
         }
     }
 }

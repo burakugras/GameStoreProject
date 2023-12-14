@@ -36,16 +36,17 @@ namespace Business.Concretes
             return createdGameResponse;
         }
 
-        public async Task<IResult> Delete(Game game)
+        public async Task<Game> Delete(Game game)
         {
-            await _gameDal.DeleteAsync(game,true);
-            return new SuccessResult("Oyun silindi");//magic string!!!
+            var data = await _gameDal.GetAsync(g => g.Id == game.Id);
+            var result = await _gameDal.DeleteAsync(data, true);
+            return result;
         }
 
         public async Task<CreatedGameResponse> Get(Guid id)
         {
-            var getGame = await _gameDal.GetAsync(g => g.Id == id);
-            var mappedGame = _mapper.Map<CreatedGameResponse>(getGame);
+            var data = await _gameDal.GetAsync(g => g.Id == id);
+            var mappedGame = _mapper.Map<CreatedGameResponse>(data);
             return mappedGame;
         }
 
@@ -66,10 +67,15 @@ namespace Business.Concretes
             return responseList;
         }
 
-        public async Task<CreatedGameResponse> Update(Game game)
-        {            
-            var updatedGame= await _gameDal.UpdateAsync(game);
-            var mappedGame=_mapper.Map<CreatedGameResponse>(updatedGame);
+        public async Task<UpdatedGameResponse> Update(UpdateGameRequest updateGameRequest)
+        {
+            var data = await _gameDal.GetAsync(g => g.Id == updateGameRequest.Id);
+            _mapper.Map(updateGameRequest, data);
+
+            data.UpdatedDate = DateTime.Now;
+            var updatedGame = await _gameDal.UpdateAsync(data);
+
+            var mappedGame = _mapper.Map<UpdatedGameResponse>(updatedGame);
             return mappedGame;
         }
     }

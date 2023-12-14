@@ -35,14 +35,18 @@ namespace Business.Concretes
             return createdGamerResponse;
         }
 
-        public Task<CreatedGamerResponse> Delete(CreateGamerRequest createGamerRequest)
+        public async Task<Gamer> Delete(Gamer gamer)
         {
-            throw new NotImplementedException();
+            var data = await _gamerDal.GetAsync(g => g.Id == gamer.Id);
+            var result = await _gamerDal.DeleteAsync(data, true);
+            return result;
         }
 
-        public Task<CreatedGamerResponse> Get(Guid id)
+        public async Task<CreatedGamerResponse> Get(Guid id)
         {
-            throw new NotImplementedException();
+            var data = await _gamerDal.GetAsync(g => g.Id == id);
+            var result = _mapper.Map<CreatedGamerResponse>(data);
+            return result;
         }
 
         public async Task<IPaginate<GetListGamerResponse>> GetAll()
@@ -53,9 +57,19 @@ namespace Business.Concretes
             return responseList;
         }
 
-        public Task<CreatedGamerResponse> Update(CreateGamerRequest createGamerRequest)
+        public async Task<UpdatedGamerResponse> Update(UpdateGamerRequest updateGamerRequest)
         {
-            throw new NotImplementedException();
+            var data = await _gamerDal.GetAsync(g => g.Id == updateGamerRequest.Id);
+            _mapper.Map(updateGamerRequest, data);
+
+            data.UpdatedDate = DateTime.Now;
+            var updatedGame = await _gamerDal.UpdateAsync(data);
+
+            var mappedGamer = _mapper.Map<UpdatedGamerResponse>(updatedGame);
+            return mappedGamer;
+
+
+
         }
     }
 }

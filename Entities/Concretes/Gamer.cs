@@ -12,6 +12,6 @@ namespace Entities.Concretes
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Balance { get; set; } = 0; 
-        public List<Game> OwnedProducts { get; set; } = new List<Game>();
+        //public List<Game> OwnedProducts { get; set; } = new List<Game>();
     }
 }

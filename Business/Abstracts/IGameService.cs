@@ -14,8 +14,8 @@ namespace Business.Abstracts
     public interface IGameService
     {
         Task<CreatedGameResponse> Add(CreateGameRequest createGameRequest);
-        Task<CreatedGameResponse> Update(Game game);
-        Task<IResult> Delete(Game game);
+        Task<UpdatedGameResponse> Update(UpdateGameRequest updateGameRequest);
+        Task<Game> Delete(Game game);
         Task<IPaginate<GetListGameResponse>> GetAll();
         Task<CreatedGameResponse> Get(Guid id);
 

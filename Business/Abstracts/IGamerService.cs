@@ -13,8 +13,8 @@ namespace Business.Abstracts
     public interface IGamerService
     {
         Task<CreatedGamerResponse> Add(CreateGamerRequest createGamerRequest);
-        Task<CreatedGamerResponse> Update(CreateGamerRequest createGamerRequest);
-        Task<CreatedGamerResponse> Delete(CreateGamerRequest createGamerRequest);
+        Task<UpdatedGamerResponse> Update(UpdateGamerRequest updateGamerRequest);
+        Task<Gamer> Delete(Gamer gamer);
         Task<IPaginate<GetListGamerResponse>> GetAll();
         Task<CreatedGamerResponse> Get(Guid id);
     }
