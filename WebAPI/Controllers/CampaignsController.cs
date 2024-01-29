@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public async Task<IActionResult> GetGame(Guid id)
+        public async Task<IActionResult> GetGame(int id)
         {
             var result = await _campaignService.Get(id);
             return Ok(result);

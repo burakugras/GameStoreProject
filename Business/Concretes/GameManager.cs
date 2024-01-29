@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Constants;
 using Business.Dtos.Requests;
 using Business.Dtos.Responses;
+using Business.Rules.ValidationRules;
 using Core.DataAccess.Paging;
-using Core.Utilities;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
@@ -20,14 +13,19 @@ namespace Business.Concretes
     {
         IGameDal _gameDal;
         IMapper _mapper;
-        public GameManager(IGameDal gameDal, IMapper mapper)
+        GameValidationRule _gameBusinessRule;
+
+        public GameManager(IGameDal gameDal, IMapper mapper, GameValidationRule gameBusinessRule)
         {
             _gameDal = gameDal;
             _mapper = mapper;
+            _gameBusinessRule = gameBusinessRule;
         }
 
         public async Task<CreatedGameResponse> Add(CreateGameRequest createGameRequest)
         {
+            await _gameBusinessRule.GameNameCantRepeat(createGameRequest);
+            await _gameBusinessRule.PriceCantPassFifty(createGameRequest);
             Game game = _mapper.Map<Game>(createGameRequest);
             Game createdGame = await _gameDal.AddAsync(game);
 
@@ -43,7 +41,7 @@ namespace Business.Concretes
             return result;
         }
 
-        public async Task<CreatedGameResponse> Get(Guid id)
+        public async Task<CreatedGameResponse> Get(int id)
         {
             var data = await _gameDal.GetAsync(g => g.Id == id);
             var mappedGame = _mapper.Map<CreatedGameResponse>(data);
@@ -51,7 +49,7 @@ namespace Business.Concretes
         }
 
         /*
-        public async Task<Game> Get(Guid id)
+        public async Task<Game> Get(int id)
         {
             var getGame = await _gameDal.GetAsync(g => g.Id == id);
             //var mappedGame = _mapper.Map<CreatedGameResponse>(getGame);

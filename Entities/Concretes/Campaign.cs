@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Campaign:Entity<Guid>
+    public class Campaign:Entity<int>
     {
         public string Name { get; set; }
         public float? Discount { get; set; }

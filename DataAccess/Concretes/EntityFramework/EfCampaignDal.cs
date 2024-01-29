@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace DataAccess.Concretes.EntityFramework
 {
 
-    public class EfCampaignDal : EfRepositoryBase<Campaign, Guid, GameStoreDBContext>, ICampaignDal
+    public class EfCampaignDal : EfRepositoryBase<Campaign, int, GameStoreDBContext>, ICampaignDal
     {
         GameStoreDBContext _context;
         public EfCampaignDal(GameStoreDBContext context) : base(context)

@@ -8,7 +8,7 @@ namespace Business.Dtos.Responses
 {
     public class GetListGameResponse
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int UnitsInStock { get; set; }

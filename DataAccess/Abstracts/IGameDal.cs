@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IGameDal : IRepository<Game, Guid>, IAsyncRepository<Game, Guid>
+    public interface IGameDal : IRepository<Game, int>, IAsyncRepository<Game, int>
     {
 
 

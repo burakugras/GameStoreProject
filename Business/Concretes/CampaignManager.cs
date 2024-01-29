@@ -42,7 +42,7 @@ namespace Business.Concretes
             return result;
         }
 
-        public async Task<CreatedCampaignResponse> Get(Guid id)
+        public async Task<CreatedCampaignResponse> Get(int id)
         {
             var data= await _campaignDal.GetAsync(c=>c.Id == id);
             var mappedCampaign=_mapper.Map<CreatedCampaignResponse>(data);

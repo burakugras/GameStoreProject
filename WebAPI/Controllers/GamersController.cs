@@ -45,7 +45,7 @@ public class GamersController : ControllerBase
     }
 
     [HttpGet("getbyid")]
-    public async Task<IActionResult> GetGamer(Guid id)
+    public async Task<IActionResult> GetGamer(int id)
     {
         var result = await _gamerService.Get(id);
         return Ok(result);

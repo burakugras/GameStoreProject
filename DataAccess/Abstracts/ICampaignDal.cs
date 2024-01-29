@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface ICampaignDal : IRepository<Campaign, Guid>, IAsyncRepository<Campaign, Guid>
+    public interface ICampaignDal : IRepository<Campaign, int>, IAsyncRepository<Campaign, int>
     {
 
     }

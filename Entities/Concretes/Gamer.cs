@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Gamer :Entity<Guid>
+    public class Gamer :Entity<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

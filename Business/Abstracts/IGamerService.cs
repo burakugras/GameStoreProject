@@ -16,6 +16,6 @@ namespace Business.Abstracts
         Task<UpdatedGamerResponse> Update(UpdateGamerRequest updateGamerRequest);
         Task<Gamer> Delete(Gamer gamer);
         Task<IPaginate<GetListGamerResponse>> GetAll();
-        Task<CreatedGamerResponse> Get(Guid id);
+        Task<CreatedGamerResponse> Get(int id);
     }
 }

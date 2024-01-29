@@ -8,7 +8,7 @@ namespace Business.Dtos.Responses
 {
     public class CreatedCampaignResponse
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public float? Discount { get; set; }
     }

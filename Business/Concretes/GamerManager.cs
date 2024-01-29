@@ -42,7 +42,7 @@ namespace Business.Concretes
             return result;
         }
 
-        public async Task<CreatedGamerResponse> Get(Guid id)
+        public async Task<CreatedGamerResponse> Get(int id)
         {
             var data = await _gamerDal.GetAsync(g => g.Id == id);
             var result = _mapper.Map<CreatedGamerResponse>(data);

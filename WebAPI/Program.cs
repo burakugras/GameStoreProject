@@ -1,9 +1,6 @@
-using Business.Abstracts;
-using Business.Concretes;
-using DataAccess;
 using Business;
-using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
+using DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +15,7 @@ builder.Services.AddDataAccessServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.ConfigureCustomExceptionMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();

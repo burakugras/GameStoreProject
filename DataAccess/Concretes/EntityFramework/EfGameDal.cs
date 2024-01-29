@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-    public class EfGameDal : EfRepositoryBase<Game, Guid, GameStoreDBContext>, IGameDal
+    public class EfGameDal : EfRepositoryBase<Game, int, GameStoreDBContext>, IGameDal
     {
         GameStoreDBContext _context;
         public EfGameDal(GameStoreDBContext context) : base(context)
